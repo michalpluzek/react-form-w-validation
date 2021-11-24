@@ -7,6 +7,7 @@ class App extends React.Component {
     email: "",
     password: "",
     checkbox: false,
+    sendForm: false,
     errors: {
       username: false,
       email: false,
@@ -21,6 +22,7 @@ class App extends React.Component {
     email_incorrect: "Brak @ w emailu.",
     password_incorrect: "Hasło musi mieć min. 8 znaków.",
     checkbox_incorrect: "Nie potwierdzone zapozanie się z regulaminem.",
+    form_send: "Formularz został wysłany.",
   };
 
   handleChange = (e) => {
@@ -44,6 +46,7 @@ class App extends React.Component {
         email: "",
         password: "",
         checkbox: false,
+        sendForm: true,
         errors: {
           username: false,
           email: false,
@@ -53,6 +56,7 @@ class App extends React.Component {
       });
     } else {
       this.setState({
+        sendForm: false,
         errors: {
           username: !validation.username,
           email: !validation.email,
@@ -101,8 +105,21 @@ class App extends React.Component {
     };
   };
 
+  componentDidUpdate() {
+    if (this.state.sendForm) {
+      setTimeout(
+        () =>
+          this.setState({
+            sendForm: false,
+          }),
+        3000
+      );
+    }
+  }
+
   render() {
-    const { username, email, password, checkbox, errors } = this.state;
+    const { username, email, password, checkbox, sendForm, errors } =
+      this.state;
     const {
       username_incorrect,
       email_incorrect,
@@ -167,6 +184,7 @@ class App extends React.Component {
 
           <button>Wyślij</button>
         </form>
+        {sendForm && <h4>{this.message.form_send}</h4>}
       </div>
     );
   }
