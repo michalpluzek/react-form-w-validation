@@ -12,5 +12,8 @@ input {
 }
 
 button {
+  display: block;
+  max-width: 200px;
   margin-top: 20px;
+  padding: 10px 20px;
 }

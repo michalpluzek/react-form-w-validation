@@ -11,7 +11,8 @@ class App extends React.Component {
 
   handleChange = (e) => {
     const name = e.target.name;
-    const value = name === "checkbox" ? e.target.checked : e.target.value;
+    const type = e.target.type;
+    const value = type === "checkbox" ? e.target.checked : e.target.value;
 
     this.setState({
       [name]: value,
@@ -27,7 +28,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} noValidation>
           <label htmlFor="user">
             Twoje imię:
             <input
@@ -40,7 +41,7 @@ class App extends React.Component {
           </label>
 
           <label htmlFor="email">
-            E-mail:
+            Twój email:
             <input
               type="email"
               id="email"
@@ -51,7 +52,7 @@ class App extends React.Component {
           </label>
 
           <label htmlFor="pass">
-            Hasło:
+            Twoje hasło:
             <input
               type="password"
               id="pass"
@@ -72,7 +73,7 @@ class App extends React.Component {
             Zapoznałem/am się z regulaminem.
           </label>
 
-          <button>Wyślij formularz</button>
+          <button>Wyślij</button>
         </form>
       </div>
     );
