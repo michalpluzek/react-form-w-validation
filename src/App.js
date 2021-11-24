@@ -7,6 +7,20 @@ class App extends React.Component {
     email: "",
     password: "",
     checkbox: false,
+    errors: {
+      username: false,
+      email: false,
+      password: false,
+      checkbox: false,
+    },
+  };
+
+  message = {
+    username_incorrect:
+      "Nazwa musi być dłuższa niż 10 znaków i nie może zawierać spacji.",
+    email_incorrect: "Brak @ w emailu.",
+    password_incorrect: "Hasło musi mieć min. 8 znaków.",
+    checkbox_incorrect: "Nie potwierdzone zapozanie się z regulaminem.",
   };
 
   handleChange = (e) => {
@@ -24,11 +38,17 @@ class App extends React.Component {
   };
 
   render() {
-    const { username, email, password, checkbox } = this.state;
+    const { username, email, password, checkbox, errors } = this.state;
+    const {
+      username_incorrect,
+      email_incorrect,
+      password_incorrect,
+      checkbox_incorrect,
+    } = this.message;
 
     return (
       <div className="App">
-        <form onSubmit={this.handleSubmit} noValidation>
+        <form onSubmit={this.handleSubmit} noValidate>
           <label htmlFor="user">
             Twoje imię:
             <input
@@ -38,6 +58,9 @@ class App extends React.Component {
               value={username}
               onChange={this.handleChange}
             />
+            {errors.username && (
+              <span className="red">{username_incorrect}</span>
+            )}
           </label>
 
           <label htmlFor="email">
@@ -49,6 +72,7 @@ class App extends React.Component {
               value={email}
               onChange={this.handleChange}
             />
+            {errors.email && <span className="red">{email_incorrect}</span>}
           </label>
 
           <label htmlFor="pass">
@@ -60,6 +84,9 @@ class App extends React.Component {
               value={password}
               onChange={this.handleChange}
             />
+            {errors.password && (
+              <span className="red">{password_incorrect}</span>
+            )}
           </label>
 
           <label htmlFor="check">
@@ -72,6 +99,7 @@ class App extends React.Component {
             />
             Zapoznałem/am się z regulaminem.
           </label>
+          {errors.checkbox && <span className="red">{checkbox_incorrect}</span>}
 
           <button>Wyślij</button>
         </form>
