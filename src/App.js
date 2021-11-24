@@ -28,7 +28,7 @@ class App extends React.Component {
       <div className="App">
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="user">
-            Twoje imię:{" "}
+            Twoje imię:
             <input
               type="text"
               id="user"
@@ -39,7 +39,7 @@ class App extends React.Component {
           </label>
 
           <label htmlFor="email">
-            E-mail:{" "}
+            E-mail:
             <input
               type="email"
               id="email"
@@ -50,7 +50,7 @@ class App extends React.Component {
           </label>
 
           <label htmlFor="password">
-            Hasło:{" "}
+            Hasło:
             <input
               type="password"
               id="password"
@@ -61,7 +61,6 @@ class App extends React.Component {
           </label>
 
           <label htmlFor="checkbox">
-            Twoje imię:{" "}
             <input
               type="checkbox"
               id="checkbox"
@@ -69,6 +68,7 @@ class App extends React.Component {
               value={checkbox}
               onChange={this.handleChange}
             />
+            Zapoznałem/am się z regulaminem.
           </label>
 
           <button>Wyślij formularz</button>
