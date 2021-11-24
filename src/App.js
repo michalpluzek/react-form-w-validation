@@ -10,10 +10,11 @@ class App extends React.Component {
   };
 
   handleChange = (e) => {
-    const username = e.traget.value;
+    const name = e.target.name;
+    const value = name === "checkbox" ? e.target.checked : e.target.value;
 
     this.setState({
-      username,
+      [name]: value,
     });
   };
 
@@ -49,21 +50,21 @@ class App extends React.Component {
             />
           </label>
 
-          <label htmlFor="password">
+          <label htmlFor="pass">
             Hasło:
             <input
               type="password"
-              id="password"
+              id="pass"
               name="password"
               value={password}
               onChange={this.handleChange}
             />
           </label>
 
-          <label htmlFor="checkbox">
+          <label htmlFor="check">
             <input
               type="checkbox"
-              id="checkbox"
+              id="check"
               name="checkbox"
               value={checkbox}
               onChange={this.handleChange}
