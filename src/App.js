@@ -17,7 +17,7 @@ class App extends React.Component {
 
   message = {
     username_incorrect:
-      "Nazwa musi być dłuższa niż 10 znaków i nie może zawierać spacji.",
+      "Nazwa musi być dłuższa niż 3 znaki i nie może zawierać spacji.",
     email_incorrect: "Brak @ w emailu.",
     password_incorrect: "Hasło musi mieć min. 8 znaków.",
     checkbox_incorrect: "Nie potwierdzone zapozanie się z regulaminem.",
@@ -35,6 +35,70 @@ class App extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+
+    const validation = this.formValidation();
+
+    if (validation.correct) {
+      this.setState({
+        username: "",
+        email: "",
+        password: "",
+        checkbox: false,
+        errors: {
+          username: false,
+          email: false,
+          password: false,
+          checkbox: false,
+        },
+      });
+    } else {
+      this.setState({
+        errors: {
+          username: !validation.username,
+          email: !validation.email,
+          password: !validation.password,
+          checkbox: !validation.checkbox,
+        },
+      });
+    }
+  };
+
+  formValidation = () => {
+    let username = false;
+    let email = false;
+    let password = false;
+    let checkbox = false;
+    let correct = false;
+
+    if (
+      this.state.username.length > 3 &&
+      this.state.username.indexOf(" ") === -1
+    ) {
+      username = true;
+    }
+
+    if (this.state.email.indexOf("@") !== -1) {
+      email = true;
+    }
+
+    if (this.state.password.length >= 8) {
+      password = true;
+    }
+
+    if (this.state.checkbox) {
+      checkbox = true;
+    }
+
+    if (username && email && password && checkbox) {
+      correct = true;
+    }
+    return {
+      correct,
+      username,
+      email,
+      password,
+      checkbox,
+    };
   };
 
   render() {
