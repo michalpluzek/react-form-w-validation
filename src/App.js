@@ -19,8 +19,9 @@ class App extends React.Component {
   message = {
     username_incorrect:
       "Nazwa musi być dłuższa niż 3 znaki i nie może zawierać spacji.",
-    email_incorrect: "Brak @ w emailu.",
-    password_incorrect: "Hasło musi mieć min. 8 znaków.",
+    email_incorrect: "Niewłaściwy adres email.",
+    password_incorrect:
+      "Hasło musi mieć min. 8 znaków, jedną cyfrę, jedną małą i jedną dużą literę.",
     checkbox_incorrect: "Nie potwierdzone zapozanie się z regulaminem.",
     form_send: "Formularz został wysłany.",
   };
@@ -74,20 +75,26 @@ class App extends React.Component {
     let checkbox = false;
     let correct = false;
 
-    if (
-      this.state.username.length > 3 &&
-      this.state.username.indexOf(" ") === -1
-    ) {
-      username = true;
-    }
+    // if (
+    //   this.state.username.length > 3 &&
+    //   this.state.username.indexOf(" ") === -1
+    // ) {
+    //   username = true;
+    // }
+    const regUsername = /^\S{3,}$/i;
+    username = regUsername.test(this.state.username);
 
-    if (this.state.email.indexOf("@") !== -1) {
-      email = true;
-    }
+    // if (this.state.email.indexOf("@") !== -1) {
+    //   email = true;
+    // }
+    const regEmail = /\w{3,}@[a-z]{2,}\.[a-z]{2,}/i;
+    email = regEmail.test(this.state.email);
 
-    if (this.state.password.length >= 8) {
-      password = true;
-    }
+    // if (this.state.password.length >= 8) {
+    //   password = true;
+    // }
+    const regPassword = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})/;
+    password = regPassword.test(this.state.password);
 
     if (this.state.checkbox) {
       checkbox = true;
